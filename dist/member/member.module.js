@@ -10,14 +10,23 @@ exports.MemberModule = void 0;
 const common_1 = require("@nestjs/common");
 const member_controller_1 = require("./member.controller");
 const member_service_1 = require("./member.service");
+const prisma_module_1 = require("../database/prisma.module");
+const member_repository_1 = require("./repositories/member-repository");
+const prisma_member_repository_1 = require("./repositories/implementation/prisma-member-repository");
 let MemberModule = class MemberModule {
 };
 exports.MemberModule = MemberModule;
 exports.MemberModule = MemberModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [prisma_module_1.PrismaModule],
         controllers: [member_controller_1.MemberController],
-        providers: [member_service_1.MemberService],
+        providers: [
+            member_service_1.MemberService,
+            {
+                provide: member_repository_1.MemberRepository,
+                useClass: prisma_member_repository_1.PrismaMemberRepository
+            }
+        ]
     })
 ], MemberModule);
 //# sourceMappingURL=member.module.js.map

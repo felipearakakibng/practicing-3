@@ -1,3 +1,10 @@
+import { MemberRepository } from './repositories/member-repository';
 export declare class MemberService {
-    getHello(): string;
+    private readonly member;
+    constructor(member: MemberRepository);
+    getHello(label: string): string;
+    create(data: {
+        name: string;
+        function: string;
+    }): Promise<any>;
 }
